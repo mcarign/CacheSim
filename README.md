@@ -32,7 +32,13 @@ Something interesting we can draw from this graph is that smaller cache sizes te
 ### AAT vs. L1 Cache Size (L1 + L2, varied cache size, block size 32B, L1 associativity = 4, L2 associativity = 8):
 
 <img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/adc93180-d03c-4032-8f0d-2de037ede781" />
+In this graph the lines represent the L2 cache sizes used even thought the relationship the graph is trying to show is between L1 cache size and AAT. However, with this approach what we can learn is that for all L2 sizes, as the L1 size increases AAT will also increase. Another intersting behavior we can see is that the L2 size jump from 16384B to 32768B has a large difference from in AAT but from an L2 size of 32768B to 65536B the difference in AAT is minimal.
 
 ### Stream Buffer analysis (L1 only, cache size = 1KB, associativity = 1, block size = 16):
+<img width="1540" height="442" alt="image" src="https://github.com/user-attachments/assets/4dc2261f-2fc5-4eec-a1d2-0f47c50b3279" />
 
 <img width="307" height="211" alt="image" src="https://github.com/user-attachments/assets/542966a7-57aa-41a5-b867-35b641e50dab" />
+
+Minimum number of stream buffers needed to have any effect on L1 miss rate: 3
+This many stream buffers are required because we have 3 arrays that reference different contiguous memory locations from each other, each time there is a hit in the stream buffer it will prefetch the next consecutive block for its respective stream, and in our case with this access pattern the prefetcher will keep refilling and supply a block to cache for its respective array reference.
+Using fewer stream buffers is futile because given the evenly alternating access pattern for the arrays, the stream buffer will never keep an array’s stream longer that two memory accesses/requests so it will end up evicting the LRU array’s stream and it will never utilize the stream buffer if we only have less than three stream buffers.
