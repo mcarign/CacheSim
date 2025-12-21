@@ -2,9 +2,9 @@
 This is my flexible cache and memory hierarchy simulator I built for my Microprocessor Architecture course. This simulator does not cover every single aspect a modern commercial cache can have, but it does simulate the standard and most important aspects of one. This simulator allows for the user to configure the cache's block size, L1/L2 associativity, L1/L2 cache size, number of stream buffers, and stream buffer size. 
 
 ### Constraints and details to note about my simulator: 
-  - The parameters are that block size and sets must be powers of two,
+  - The parameters that are block size and sets must be powers of two,
   - It uses LRU replacement policy,
-  - It uses WBWA write policy (Write Back + Write Allocate)
+  - It uses WBWA write policy (Write Back + Write Allocate),
   - If multiple stream buffers have a hit for the same block, I only consider the MRU steam buffer that hit, leaving the others as they are.
 
 ### The different hierarchies I explored were:
@@ -18,6 +18,7 @@ This is my flexible cache and memory hierarchy simulator I built for my Micropro
 ### Miss Penalty vs. Cache Size (L1 only, fixed block size of 32B):
 
 <img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/091b044e-1bd5-4840-bcd8-dc93aa6388b5" />
+We can tell that for all associativities, as cache size increases the miss penalty decreases, likely due to the increase amount of space which will also help prevent evictions. We can observe from the graph that the functions all asymptotically approach 0.025, which is what out compulsory miss rate is.
 
 ### Average access Time(AAT) vs. Cache Size (L1 only, fixed block size of 32B):
 
@@ -26,6 +27,7 @@ This is my flexible cache and memory hierarchy simulator I built for my Micropro
 ### Miss Rate vs. Block Size (L1 only, varied cache and block size, associativity = 4):
 
 <img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/e4f399e4-85b3-4a54-a00c-8684d396d6e1" />
+Something interesting we can draw from this graph is that smaller cache sizes tend to perform better with smaller block sizes. For cache size 1024B, its miss rate at its lowest at 32B of block size, where chace size 32768B is at its lowest miss rate with 128B of block size from the tests we ran.
 
 ### AAT vs. L1 Cache Size (L1 + L2, varied cache size, block size 32B, L1 associativity = 4, L2 associativity = 8):
 
