@@ -13,6 +13,9 @@ This is my flexible cache and memory hierarchy simulator I built for my Micropro
   - L1 + Stream Buffer
   - L1 + L2 + Stream Buffer
 
+**DISCLAIMER:**  
+This code is my own original work. It may not be used, copied, or adapted by anyone currently taking this course or by future students for their own project submissions. Doing so would violate the course’s academic integrity policies, which the professor has clearly stated. This repository is publicly available solely for the purpose of showcasing my work to recruiters, interviewers, and potential employers.
+
 ## Analysis
 
 ### Miss Penalty vs. Cache Size (L1 only, fixed block size of 32B):
